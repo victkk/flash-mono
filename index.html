@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="Flash-Mono: Feed-Forward Accelerated Gaussian Splatting Monocular SLAM">
+  <meta name="description" content="Flash-Mono is a real-time monocular GS-SLAM system using a recurrent feed-forward model to predict poses and Gaussians directly, achieving 10x speedup with state-of-the-art tracking and mapping quality.">
+  <meta name="keywords" content="SLAM, Gaussian Splatting, 3D Reconstruction, Monocular SLAM, Feed-Forward, Real-Time, Computer Vision, 2DGS, Loop Closure">
+  <meta name="author" content="Zicheng Zhang, Ke Wu, Xiangting Meng, Keyu Liu, Jieru Zhao, Wenchao Ding">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="English">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Flash-Mono">
+  <meta property="og:title" content="Flash-Mono: Feed-Forward Accelerated Gaussian Splatting Monocular SLAM">
+  <meta property="og:description" content="Flash-Mono is a real-time monocular GS-SLAM system using a recurrent feed-forward model to predict poses and Gaussians directly, achieving 10x speedup with state-of-the-art tracking and mapping quality.">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Flash-Mono - Research Preview">
+  <meta property="article:published_time" content="2026-01-01T00:00:00.000Z">
+  <meta property="article:section" content="Research">
+  <meta property="article:tag" content="SLAM">
+  <meta property="article:tag" content="Gaussian Splatting">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Flash-Mono: Feed-Forward Accelerated Gaussian Splatting Monocular SLAM">
+  <meta name="twitter:description" content="Flash-Mono is a real-time monocular GS-SLAM system using a recurrent feed-forward model to predict poses and Gaussians directly, achieving 10x speedup with state-of-the-art tracking and mapping quality.">
+
+  <!-- Academic/Research Specific -->
+  <meta name="citation_title" content="Flash-Mono: Feed-Forward Accelerated Gaussian Splatting Monocular SLAM">
+  <meta name="citation_author" content="Zhang, Zicheng">
+  <meta name="citation_author" content="Wu, Ke">
+  <meta name="citation_author" content="Meng, Xiangting">
+  <meta name="citation_author" content="Liu, Keyu">
+  <meta name="citation_author" content="Zhao, Jieru">
+  <meta name="citation_author" content="Ding, Wenchao">
+  <meta name="citation_publication_date" content="2026">
+  <meta name="citation_conference_title" content="ICLR 2026">
+  
+  <!-- Additional SEO -->
+  <meta name="theme-color" content="#2563eb">
+  <meta name="msapplication-TileColor" content="#2563eb">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://ajax.googleapis.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+
+  <title>Flash-Mono: Feed-Forward Accelerated Gaussian Splatting Monocular SLAM</title>
+  
+  <!-- Favicon and App Icons -->
+  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+  <link rel="apple-touch-icon" href="static/images/favicon.ico">
+  
+  <!-- Critical CSS - Load synchronously -->
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+  
+  <!-- Non-critical CSS - Load asynchronously -->
+  <link rel="preload" href="static/css/bulma-carousel.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/bulma-slider.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/fontawesome.all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+  <!-- Fallback for browsers that don't support preload -->
+  <noscript>
+    <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  </noscript>
+  
+  <!-- Fonts - Optimized loading -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Defer non-critical JavaScript -->
+  <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script defer src="static/js/bulma-carousel.min.js"></script>
+  <script defer src="static/js/bulma-slider.min.js"></script>
+  <script defer src="static/js/index.js"></script>
+  
+  <!-- Structured Data for Academic Papers -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ScholarlyArticle",
+    "headline": "Flash-Mono: Feed-Forward Accelerated Gaussian Splatting Monocular SLAM",
+    "description": "Flash-Mono is a real-time monocular GS-SLAM system using a recurrent feed-forward model to predict poses and Gaussians directly, achieving 10x speedup with state-of-the-art tracking and mapping quality.",
+    "author": [
+      {
+        "@type": "Person",
+        "name": "Zicheng Zhang",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "Fudan University"
+        }
+      },
+      {
+        "@type": "Person",
+        "name": "Ke Wu",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "Fudan University"
+        }
+      },
+      {
+        "@type": "Person",
+        "name": "Xiangting Meng",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "ShanghaiTech University"
+        }
+      },
+      {
+        "@type": "Person",
+        "name": "Keyu Liu",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "Shanghai Jiao Tong University"
+        }
+      },
+      {
+        "@type": "Person",
+        "name": "Jieru Zhao",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "Shanghai Jiao Tong University"
+        }
+      },
+      {
+        "@type": "Person",
+        "name": "Wenchao Ding",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "Fudan University"
+        }
+      }
+    ],
+    "datePublished": "2026-01-01",
+    "publisher": {
+      "@type": "Organization",
+      "name": "ICLR 2026"
+    },
+    "keywords": ["SLAM", "Gaussian Splatting", "3D Reconstruction", "Monocular SLAM", "Feed-Forward", "Real-Time", "Computer Vision"],
+    "abstract": "Monocular 3D Gaussian Splatting SLAM suffers from critical limitations in time efficiency, geometric accuracy, and multi-view consistency. We present Flash-Mono, a system composed of three core modules: a feed-forward prediction frontend, a 2D Gaussian Splatting mapping backend, and an efficient hidden-state-based loop closure module.",
+    "isAccessibleForFree": true,
+    "about": [
+      {
+        "@type": "Thing",
+        "name": "3D Reconstruction"
+      },
+      {
+        "@type": "Thing",
+        "name": "Visual SLAM"
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- Scroll to Top Button -->
+  <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <main id="main-content">
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title"><b>Flash-Mono:</b> Feed-Forward Accelerated Gaussian Splatting Monocular SLAM</h1>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <a href="https://victkk.github.io/" target="_blank">Zicheng Zhang</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a href="https://github.com/Promethe-us" target="_blank">Ke Wu</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a href="https://github.com/Launch-on-Titania" target="_blank">Xiangting Meng</a><sup>2</sup>,</span>
+              <span class="author-block">
+                <a href="https://github.com/LordLKY" target="_blank">Keyu Liu</a><sup>3</sup>,</span>
+              <span class="author-block">
+                <a href="https://zjru.github.io/" target="_blank">Jieru Zhao</a><sup>3</sup>,</span>
+              <span class="author-block">
+                <a href="https://wenchaoding.github.io/" target="_blank">Wenchao Ding</a><sup>1</sup>
+              </span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup>1</sup>Fudan University &nbsp;&nbsp; <sup>2</sup>ShanghaiTech University &nbsp;&nbsp; <sup>3</sup>Shanghai Jiao Tong University</span>
+              <br>
+              <span class="author-block">ICLR 2026 Poster</span>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <span class="link-block">
+                  <a href="https://openreview.net/pdf/99fb8fc57267609eb421394a9765e1566a6fe7aa.pdf" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+
+              <span class="link-block">
+                <a href="#" target="_blank"
+                class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                  <i class="fab fa-github"></i>
+                </span>
+                <span>Code</span>
+              </a>
+            </span>
+
+              <span class="link-block">
+                <a href="https://openreview.net/forum?id=nv3q3crc5D" target="_blank"
+                class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                  <i class="ai ai-arxiv"></i>
+                </span>
+                <span>OpenReview</span>
+              </a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+
+<!-- Teaser image -->
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <img src="static/images/cover_v1.png" alt="Flash-Mono reconstruction results and performance radar chart showing superior rendering quality, tracking accuracy, and 10x speedup over existing methods." style="width: 100%;" />
+      <h2 class="subtitle has-text-centered">
+        Flash-Mono reconstructs high-quality Gaussian maps in complex indoor scenes, achieving <b>10x</b> speedup over existing monocular GS-SLAM methods while delivering state-of-the-art rendering quality and trajectory tracking accuracy.
+      </h2>
+    </div>
+  </div>
+</section>
+<!-- End teaser image -->
+
+<!-- Paper abstract -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Monocular 3D Gaussian Splatting SLAM suffers from critical limitations in time efficiency, geometric accuracy, and multi-view consistency. These issues stem from the time-consuming <i>Train-from-Scratch</i> optimization and the lack of inter-frame scale consistency from single-frame geometry priors. We contend that a feed-forward paradigm, leveraging multi-frame context to predict Gaussian attributes directly, is crucial for addressing these challenges. We present <b>Flash-Mono</b>, a system composed of three core modules: a feed-forward prediction frontend, a 2D Gaussian Splatting mapping backend, and an efficient hidden-state-based loop closure module. We trained a recurrent feed-forward frontend model that progressively aggregates multi-frame visual features into a hidden state via cross attention and jointly predicts camera poses and per-pixel Gaussian properties. By directly predicting Gaussian attributes, our method bypasses the burdensome per-frame optimization required in optimization-based GS-SLAM, achieving a <b>10x</b> speedup while ensuring high-quality rendering. The power of our recurrent architecture extends beyond efficient prediction. The hidden states act as compact submap descriptors, facilitating efficient loop closure and global Sim(3) optimization to mitigate the long-standing challenge of drift. For enhanced geometric fidelity, we replace conventional 3D Gaussian ellipsoids with 2D Gaussian surfels. Extensive experiments demonstrate that Flash-Mono achieves state-of-the-art performance in both tracking and mapping quality, highlighting its potential for embodied perception and real-time reconstruction applications.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End paper abstract -->
+
+
+<!-- Method overview -->
+<section class="hero is-small is-light">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">Method Overview</h2>
+      <div class="columns is-centered has-text-centered">
+        <div class="column">
+          <img src="static/images/Pipeline.png" alt="Flash-Mono system pipeline showing the recurrent feed-forward frontend, 2DGS mapping backend, and hidden-state-based loop closure module." style="width: 100%;" loading="lazy"/>
+          <h2 class="subtitle has-text-centered" style="margin-top: 1rem;">
+            The Flash-Mono pipeline: a recurrent feed-forward frontend aggregates multi-frame visual features into a hidden state, jointly predicting camera poses and per-pixel Gaussian properties. The 2DGS mapping backend refines the map, while the hidden-state-based loop closure module enables efficient global Sim(3) optimization.
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End method overview -->
+
+
+<!-- Rendering Quality -->
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">Rendering Quality</h2>
+      <div class="columns is-centered">
+        <div class="column">
+          <img src="static/images/rgb_comparison.png" alt="Qualitative comparison of RGB rendering results across different methods" style="width: 100%;" loading="lazy"/>
+          <h2 class="subtitle has-text-centered" style="margin-top: 1rem;">
+            Qualitative comparison of rendering results. Flash-Mono produces sharper and more accurate novel view synthesis compared to existing monocular GS-SLAM methods.
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Depth Estimation -->
+<section class="hero is-small is-light">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">Depth Estimation</h2>
+      <div class="columns is-centered">
+        <div class="column">
+          <img src="static/images/depth_comparison.png" alt="Qualitative comparison of depth estimation across methods" style="width: 100%;" loading="lazy"/>
+          <h2 class="subtitle has-text-centered" style="margin-top: 1rem;">
+            Depth estimation comparison. By using 2D Gaussian surfels, Flash-Mono achieves more accurate and geometrically faithful depth reconstruction.
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Trajectory Tracking -->
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">Trajectory Tracking</h2>
+      <div class="columns is-centered">
+        <div class="column">
+          <img src="static/images/trajectory_comparison.png" alt="Trajectory comparison showing tracking accuracy" style="width: 100%;" loading="lazy"/>
+          <h2 class="subtitle has-text-centered" style="margin-top: 1rem;">
+            Trajectory comparison on challenging sequences. Flash-Mono achieves competitive or superior tracking accuracy with significantly faster processing speed.
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Scene Reconstruction -->
+<section class="hero is-small is-light">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">Scene Reconstruction</h2>
+      <div class="columns is-centered">
+        <div class="column">
+          <img src="static/images/grid_comparison_2x2_no_border.png" alt="Scene reconstruction comparison across multiple scenes" style="width: 100%;" loading="lazy"/>
+          <h2 class="subtitle has-text-centered" style="margin-top: 1rem;">
+            Scene reconstruction comparison across multiple indoor environments, demonstrating Flash-Mono's ability to handle complex geometry and varying lighting.
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Ablation Study -->
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">Ablation Study</h2>
+      <div class="columns is-centered">
+        <div class="column">
+          <img src="static/images/ablation_plots_2x2.png" alt="Ablation study results" style="width: 100%;" loading="lazy"/>
+          <h2 class="subtitle has-text-centered" style="margin-top: 1rem;">
+            Ablation study results analyzing the contribution of each component: feed-forward frontend, 2DGS representation, and loop closure module.
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!--BibTex citation -->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <div class="bibtex-header">
+        <h2 class="title">BibTeX</h2>
+        <button class="copy-bibtex-btn" onclick="copyBibTeX()" title="Copy BibTeX to clipboard">
+          <i class="fas fa-copy"></i>
+          <span class="copy-text">Copy</span>
+        </button>
+      </div>
+      <pre id="bibtex-code"><code>@inproceedings{zhang2026flashmono,
+  title={Flash-Mono: Feed-Forward Accelerated Gaussian Splatting Monocular {SLAM}},
+  author={Zicheng Zhang and Ke Wu and Xiangting Meng and Keyu Liu and Jieru Zhao and Wenchao Ding},
+  booktitle={The Fourteenth International Conference on Learning Representations},
+  year={2026},
+  url={https://openreview.net/forum?id=nv3q3crc5D}
+}</code></pre>
+    </div>
+</section>
+<!--End BibTex citation -->
+  </main>
+
+  <footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+            You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  </body>
+  </html>
