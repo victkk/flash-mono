@@ -1,80 +1,31 @@
-# Academic Project Page Template
+# Flash-Mono: Feed-Forward Accelerated Gaussian Splatting Monocular SLAM
 
-> **Update (September 2025)**: This template has been modernized with better design, SEO, and mobile support. For the original version, see the [original-version branch](https://github.com/eliahuhorwitz/Academic-project-page-template/tree/original-version).
+**ICLR 2026 Poster** | [Project Page](https://victkk.github.io/flash-mono/) | [Paper (PDF)](https://openreview.net/pdf/99fb8fc57267609eb421394a9765e1566a6fe7aa.pdf) | [OpenReview](https://openreview.net/forum?id=nv3q3crc5D)
 
-A clean, responsive template for academic project pages.
+This repository hosts the project page for **Flash-Mono**.
 
+## Authors
 
-Example project pages built using this template are:
-- https://horwitz.ai/probex
-- https://vision.huji.ac.il/probegen
-- https://horwitz.ai/mother
-- https://horwitz.ai/spectral_detuning
-- https://vision.huji.ac.il/ladeda
-- https://vision.huji.ac.il/dsire
-- https://horwitz.ai/podd
-- https://dreamix-video-editing.github.io
-- https://horwitz.ai/conffusion
-- https://horwitz.ai/3d_ads/
-- https://vision.huji.ac.il/ssrl_ad
-- https://vision.huji.ac.il/deepsim
+[Zicheng Zhang](https://victkk.github.io/)<sup>1</sup>, [Ke Wu](https://github.com/Promethe-us)<sup>1</sup>, [Xiangting Meng](https://github.com/Launch-on-Titania)<sup>2</sup>, [Keyu Liu](https://github.com/LordLKY)<sup>3</sup>, [Jieru Zhao](https://zjru.github.io/)<sup>3</sup>, [Wenchao Ding](https://wenchaoding.github.io/)<sup>1</sup>
 
+<sup>1</sup>Fudan University &nbsp; <sup>2</sup>ShanghaiTech University &nbsp; <sup>3</sup>Shanghai Jiao Tong University
 
+## Abstract
 
-## Start using the template
-To start using the template click on `Use this Template`.
+Monocular 3D Gaussian Splatting SLAM suffers from critical limitations in time efficiency, geometric accuracy, and multi-view consistency. We present **Flash-Mono**, a system composed of three core modules: a feed-forward prediction frontend, a 2D Gaussian Splatting mapping backend, and an efficient hidden-state-based loop closure module. By directly predicting Gaussian attributes, our method bypasses the burdensome per-frame optimization required in optimization-based GS-SLAM, achieving a **10x** speedup while ensuring high-quality rendering.
 
-The template uses html for controlling the content and css for controlling the style. 
-To edit the websites contents edit the `index.html` file. It contains different HTML "building blocks", use whichever ones you need and comment out the rest.  
+## Citation
 
-**IMPORTANT!** Make sure to replace the `favicon.ico` under `static/images/` with one of your own, otherwise your favicon is going to be a dreambooth image of me.
-
-## What's New
-
-- Modern, clean design with better mobile support
-- Improved SEO with proper meta tags and structured data
-- Performance improvements (lazy loading, optimized assets)
-- More Works dropdown
-- Copy button for BibTeX citations
-- Better accessibility
-
-## Components
-
-- Teaser video
-- Image carousel
-- YouTube video embedding
-- Video carousel
-- PDF poster viewer
-- BibTeX citation
-
-## Customization
-
-The HTML file has TODO comments showing what to replace:
-
-- Paper title, authors, institution, conference
-- Links (arXiv, GitHub, etc.)
-- Abstract and descriptions  
-- Videos, images, and PDFs
-- Related works in the dropdown
-- Meta tags for SEO and social sharing
-
-### Meta Tags
-The template includes meta tags for better search engine visibility and social media sharing. These appear in the `<head>` section and help with:
-- Google Scholar indexing
-- Social media previews (Twitter, Facebook, LinkedIn)
-- Search engine optimization
-
-Create a 1200x630px social preview image at `static/images/social_preview.png`.
-
-## Tips
-
-- Compress images with [TinyPNG](https://tinypng.com)
-- Use YouTube for large videos (>10MB)  
-- Replace the favicon in `static/images/`
-- Works with GitHub Pages
+```bibtex
+@inproceedings{zhang2026flashmono,
+  title={Flash-Mono: Feed-Forward Accelerated Gaussian Splatting Monocular {SLAM}},
+  author={Zicheng Zhang and Ke Wu and Xiangting Meng and Keyu Liu and Jieru Zhao and Wenchao Ding},
+  booktitle={The Fourteenth International Conference on Learning Representations},
+  year={2026},
+  url={https://openreview.net/forum?id=nv3q3crc5D}
+}
+```
 
 ## Acknowledgments
-Parts of this project page were adopted from the [Nerfies](https://nerfies.github.io/) page.
 
-## Website License
-<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+This project page is built using the [Academic Project Page Template](https://github.com/eliahuhorwitz/Academic-project-page-template). Licensed under [CC BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/).
